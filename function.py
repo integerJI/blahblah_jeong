@@ -97,4 +97,35 @@ a = [1,2,3]
 a.extend([4,5]) # == a += [4,5]와 동일하다.
 a >>> [1, 2, 3, 4, 5] # extend(x)는 x의 값에 리스트만 올수있다.
 
+# 딕셔너리 함수
+a = {'name': 'pey', 'phone': '0119993323', 'birth': '1118'}
 
+# Key 리스트 만들기(keys)
+a.keys() >>> dict_keys(['name', 'phone', 'birth']) # dict_keys 객체를 돌려준다.
+list(a.keys()) >>> ['name', 'phone', 'birth'] # 리스트로 한번 감싸줘야 리스트로 변환된다.
+
+# Value 리스트 만들기(values)
+a.values() >>> dict_values(['pey', '0119993323', '1118']) # keys와는 반대로 values를 하면 된다.
+list(a.values()) >>> ['pey', '0119993323', '1118'] # 마찬가지로 리스트로 감싼다.
+
+# Key, Value 쌍 얻기(items)
+a.items() >>> dict_items([('name', 'pey'), ('phone', '0119993323'), ('birth', '1118')]) # key와 value값을 한 쌍으로 묶은 튜플을 돌려준다.
+list(a.items()) >>> [('name', 'pey'), ('phone', '0119993323'), ('birth', '1118')]
+
+# Key: Value 쌍 모두 지우기(clear)
+a.clear() # 쌍 모두가 사라진다.
+a >>> {} # 빈 딕셔너리로 표현된다.
+
+# Key로 Value얻기(get)
+a = {'name':'pey', 'phone':'0119993323', 'birth': '1118'}
+a.get('name') >>> 'pey' # get(x), x에 대응되는 value를 돌려준다.
+a.get('phone') >>> '0119993323' # a.get('phone') == a['phone']
+
+print(a.get('nokey')) >>> None # 딕셔너리에 없는 값을 찾을때 None는 "거짓"이라는 뜻이다.
+print(a['nokey']) >>> error # 위에서 a.get('phone') == a['phone']는 같다고 표현하였지만 찾으려면 오류가 난다. >>> why?
+
+a.get('foo', 'bar') >>> 'bar' # 찾으려는 key가 없을 경우 미리 정해 둔 디폴트 값을 대신 가져온다. get(x,'디폴트값') >>> 쫌 애매 한번 찾아보자.
+
+# 해당 Key가 딕셔너리 안에 있는지 조사하기(in)
+'name' in a >>> True
+'email' in a >>> False
