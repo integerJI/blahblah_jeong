@@ -129,3 +129,30 @@ a.get('foo', 'bar') >>> 'bar' # 찾으려는 key가 없을 경우 미리 정해 
 # 해당 Key가 딕셔너리 안에 있는지 조사하기(in)
 'name' in a >>> True
 'email' in a >>> False
+
+# 집합 함수
+s1 = set([1,2,3])
+s2 = set([3,4,5])
+
+# 값 1개 추가하기(add)
+s1.add(4)
+s1 >>> {1,2,3,4}
+
+# 값 여러 개 추가하기(update)
+s1.update([4,5,6])
+s1 >>> {1,2,3,4,5,6}
+
+# 특정 값 제거하기(remove)
+s1.remove(2)
+s1 >>> {1,3}
+
+# 교집합
+s1.intersection(s2) >>> {3} # 거꾸로 가능
+
+# 합집합
+s1.union(s2) >>> {1,2,3,4,5} # 거꾸로 가능
+
+# 차집합
+s1.difference(s2) >>> {1,2}
+s2.difference(s1) >>> {4,5}
+
