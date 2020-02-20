@@ -1,0 +1,84 @@
+## 점프 투 파이썬 - 내가 프로그램을 만들 수 있을까?
+
+
+# "입력"과 "출력"
+
+구구단 프로그램으로 예를 들면
+
+1. 함수의 이름 정하기
+2. 입력받는값 2단이면 2
+3. 출력하는 값 2단이 들어오면 2, 4, 6 .. 18 까지
+4. 결과 저장 연속된 자료형이니 리스트
+
+# 1. 함수의 이름 정하기
+result = GuGu(2)
+
+GuGu라는 함수에 2란 입력값을 result에 넣었다.
+
+# 2. 결괏값 저장하기
+result = [2, 4, 6, 8, 10, 12, 14, 16, 18] 
+
+연속된 값이니 result는 리스트로 저장이 되어야 한다.
+
+# 3. 함수의 만들기
+def GuGu(n):
+    print(n)
+
+입력값이 잘 들어오는지 확인
+
+# 4. 결괏값을 담을 리스트 생성
+def GuGu(n):
+    result = []
+
+print문은 입력값 확인을 위한 값이니 삭제해도 괜찮다.
+
+$ 5. 리스트에 추가하기
+def GuGu(n):
+    result = []
+    result.append(n*1)
+    result.append(n*2)
+    result.append(n*3)
+    result.append(n*4)
+    result.append(n*5)
+    result.append(n*6)
+    result.append(n*7)
+    result.append(n*8)
+    result.append(n*9)
+    return result
+
+print(GuGu(2))
+
+결괏값은 [2, 4, 6, 8, 10, 12, 14, 16, 18]이다.
+
+result에 append 내장함수를 이용해 n*1~9까지 넣어준다.
+
+6. 함수 다듬기
+def GuGu(n):
+    result = []
+    i = 1
+    while i < 10:
+        result.append(n * i)
+        i = i + 1
+    return result
+
+append의 1~9의 값은 1씩 차례로 증가한다.
+
+for문 혹은 while를 사용하여 함수를 다듬어 준다.
+
+7. 결과 확인하기
+print(GuGu(2))
+
+결괏값: [2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
