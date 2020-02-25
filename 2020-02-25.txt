@@ -1,0 +1,49 @@
+## 점프 투 파이썬 - 3과 5의 배수 합하기
+
+# 10 미만의 자연수에서 3과 5의 배수를 구하면 3, 5, 6, 9이다. 이들의 총합은 23이다.
+# 1000 미만의 자연수에서 3의 배수와 5의 배수의 총합을 구하라.
+
+해당 문제에서의 포인트
+
+입력 받는 값은? 1부터 999까지(1000 미만의 자연수)
+출력하는 값은? 3의 배수와 5의 배수의 총합
+
+3의 배수와 5의 배수 찾는법
+3의 배수와 5의 배수가 겹칠때의 처리
+
+1. 1000 미만의 자연수 구하는 법
+for문과 while문 사용
+
+n = 1
+while n < 1000:
+    print(n)
+    n += 1
+---
+for n in range(1, 1000):
+    print(n)
+
+2. 3과 5의 배수 구하는 법
+for n in range(1, 1000):
+    if n % 3 == 0 or n % 5 == 0:
+        print(n)
+
+3. 최종
+result = 0
+for n in range(1, 1000):
+    if n % 3 == 0 or n % 5 == 0: 
+        result += n
+print(result)
+
+번외
+
+잘못된 풀이 )
+result = 0
+for n in range(1, 1000):
+    if n % 3 == 0:
+        result += n
+    if n % 5 == 0:
+        result += n
+print(result)
+
+문제집 )
+프로젝트 오일러(http://projecteuler.net/archives)
