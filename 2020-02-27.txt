@@ -1,0 +1,78 @@
+## 점프 투 파이썬 - 간단한 메모장 만들기
+
+# 원하는 메모를 파일에 저장하고 추가 및 조회가 가능한 간단한 메모장을 만들기
+
+# 설계
+필요한 기능 - 메모 추가하기, 메모 조회하기
+입력 받는 값은 - 메모 내용, 프로그램 실행 옵션
+출력하는 값은 - memo.txt
+
+1. 입력 받은 옵션과 메모를 출력하기
+# C:/doit/memo.py
+import sys
+
+option = sys.argv[1]
+memo = sys.argv[2]
+
+print(option)
+print(memo)
+
+sys.argv를 이용해 입력된 값을 읽어온다.
+sys.argv[0]는 입력받은 값 중에서 파이썬 프로그램 이름인 memo.py이다.
+sys.argv[1]은 프로그램 실행 옵션 값
+argv[2]는 메모 내용
+
+2. 명령 수행
+C:\doit>python memo.py -a "Life is too short"
+-a
+Life is too short
+
+입력받은 값을 그대로 출력한다.
+
+3. 입력받은 값 저장
+import sys
+
+option = sys.argv[1]
+
+if option == '-a':
+    memo = sys.argv[2]
+    f = open('memo.txt', 'a')
+    f.write(memo)
+    f.write('\n')
+    f.close()
+
+옵션이 -a인 경우에만 memo 값을 읽어 memo.txt 파일에 값을 쓴다.
+a모드로 메모를 작성할때 덮어쓰는게아니라 한줄씩 추가되게 하였다.
+\n을 이용해 추가될때마다 줄바꿈을 하였다.
+
+4. 확인
+C:\doit>python memo.py -a "Life is too short"  
+C:\doit>python memo.py -a "You need python"
+
+C:\doit>type memo.txt
+Life is too short
+You need python
+
+5. 작성한 메모 출력
+import sys
+
+option = sys.argv[1]
+
+if option == '-a':
+    memo = sys.argv[2]
+    f = open('memo.txt', 'a')
+    f.write(memo)
+    f.write('\n')
+    f.close()
+elif option == '-v':
+    f = open('memo.txt')
+    memo = f.read()
+    f.close()
+    print(memo)
+
+옵션으로 –v가 들어온 경우 memo.txt 파일을 읽어서 출력
+
+6. 확인
+C:\doit>python memo.py -v
+Life is too short
+You need python
