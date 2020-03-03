@@ -1,0 +1,77 @@
+# 점프 투 파이썬 - 탭을 4개의 공백으로 바꾸기
+
+# 문서 파일을 읽어 파일 안에 있는 탭(tab)을 공백(space) 4개로 바꾸게 만들기
+
+# 기능
+파일을 읽어야한다.
+문자열을 변경해야한다.
+
+# 입력
+탭을 포함한 문사파일을 입력받는다.
+
+# 출력
+탭이 공백으로 수정된 문서
+
+# python tabto4.py src dst
+tabto4.py는 파이썬 프로그램 이름이다. 
+src는 탭을 포함한 원본 파일이며
+dst는 변환한 파일이다.
+
+1. tabto4.py 파일 생성
+# c:/doit/tabto4.py
+import sys # sys.argv를 사용하여 입력값 확인
+
+src = sys.argv[1]
+dst = sys.argv[2]
+
+print(src)
+print(dst)
+
+2. 정상 출력 확인
+C:\doit>python tabto4.py a.txt b.txt
+a.txt
+b.txt
+
+3. a.txt 작성
+Life    is  too short
+You need    python
+
+4. a.txt를 읽어 변환
+# c:/doit/tabto4.py
+import sys
+
+src = sys.argv[1]
+dst = sys.argv[2]
+
+f = open(src)
+tab_content = f.read() # tab_content란 변수에 저장
+f.close()
+
+space_content = tab_content.replace("\t", " "*4) # 변수에 담긴 값을 replace를 사용해서 변환
+print(space_content)
+
+5. 확인
+C:\doit>python tabto4.py a.txt b.txt
+Life    is    too    short
+You    need    python
+
+눈으론 알수없다.
+
+6. 변경된 값을 b.txt에 저장
+# c:/doit/tabto4.py
+import sys
+
+src = sys.argv[1]
+dst = sys.argv[2]
+
+f = open(src)
+tab_content = f.read()
+f.close()
+
+space_content = tab_content.replace("\t", " "*4)
+
+f = open(dst, 'w')
+f.write(space_content) # space_content을 dst에 쓴다.
+f.close()
+
+에디터로 확인하면 탭과 공백을 다르게 표시하므로 눈으로 확인 가능하다.
