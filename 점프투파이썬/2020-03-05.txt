@@ -1,0 +1,93 @@
+## 점프 투 파이썬 - 하위 디렉터리 검색하기
+
+# 특정 디렉터리부터 하위 모든 파일 중 *.py파일을 출력해주는 프로그램을 만들어 보자. 
+
+1. sub_dir_search.py 파일 생성
+# C:/doit/sub_dir_search.py
+
+def search(dirname):
+    print (dirname)
+
+search("c:/")
+
+search는 시작 디렉터리를 입력받는다.
+
+2. 파일 검색
+# C:/doit/sub_dir_search.py
+import os
+
+def search(dirname):
+    filenames = os.listdir(dirname)
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)
+        print (full_filename)
+
+search("c:/")
+
+os.listdir를 사용하여 해당 디렉터리에 있는 파일의 리스트를 구한다.
+경로를 포함한 파일의 이름을 구하기 위해 입력으로 받은 dirname을 앞에 덧붙여 줬다.
+os.path.join을 사용하여 디렉터리와 파일의 이름을 이어준다.
+
+3. *.py인 파일만 출력
+# C:/doit/sub_dir_search.py
+import os
+
+def search(dirname):
+    filenames = os.listdir(dirname)
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)
+        ext = os.path.splitext(full_filename)[-1]
+        if ext == '.py': 
+            print(full_filename)
+
+search("c:/")
+
+os.path.splitext를 사용해 확장자를 기준으로 두 부분으로 나누어 준 뒤
+(full_filename)[-1]를 사용해 파일의 확장자를 가져왔다.
+확장자 이름이 *.py가 아니면 출력이 되지 않는다.
+
+4. 모든 디렉터리를 포함하여 검색하기
+# C:/doit/sub_dir_search.py
+import os
+
+def search(dirname):
+    try:
+        filenames = os.listdir(dirname)
+        for filename in filenames:
+            full_filename = os.path.join(dirname, filename)
+            if os.path.isdir(full_filename):
+                search(full_filename)
+            else:
+                ext = os.path.splitext(full_filename)[-1]
+                if ext == '.py': 
+                    print(full_filename)
+    except PermissionError:
+        pass
+
+search("c:/")
+
+try ... except PermissionError로 전체를 감쌋다.
+이유는 os.listdir를 수행하는 권한이 없는 디렉터리에 접근하더라도 프로그램이 오류로 종료되지 않고 그냥 수행되도록 하기 위해서이다.
+
+full_filename이 디렉터리인지 파일인지 구별하기 위해 os.path.isdir 사용
+그리고 디렉터리일경우 해당 경로를 입력받아 다시 search 함수를 호출
+이렇게 해당 디렉터리의 파일이 디렉터리일 경우 다시 search 함수를 호출해 나가면 (재귀 호출) 
+해당 디렉터리의 하위 파일을 다시 검색하기 시작하므로 결국 모든 파일들을 검색할 수 있게 된다.
+
+※ 재귀 호출이란 자기 자신을 다시 호출하는 프로그래밍 기법이다. 이 코드에서 보면 search 함수에서 다시 자기 자신인 search 함수를 호출하는 것이 바로 재귀 호출이다.
+
+---
+
+하지만 하위 디렉터리를 쉽게 검색해주는 함수가 있다.
+os.walk는 시작 디렉터리부터 시작하여 그 하위 모든 디렉터리를 차례대로 방문하게 해주는 함수이다.
+
+import os
+
+for (path, dir, files) in os.walk("c:/"):
+    for filename in files:
+        ext = os.path.splitext(filename)[-1]
+        if ext == '.py':
+            print("%s/%s" % (path, filename))
+
+ㅂㄷㅂㄷ
+
