@@ -1,0 +1,99 @@
+## 점프 투 파이썬 - 5장 연습문제 ( 2 ) Q7 ~ Q9
+
+출처 : https://wikidocs.net/42529
+
+# Q7. 다음 리스트의 최댓값과 최솟값의 합을 구해 보자.
+
+[-8, 2, 7, 5, -3, 5, 0, 1]
+
+
+# 풀이
+
+a = [-8, 2, 7, 5, -3, 5, 0, 1]
+max(a) + min(a) >>> -1
+
+max함수 사용
+
+
+# Q8. 17 / 3의 결과는 다음과 같다.
+
+ 17 / 3 = 5.666666666666667
+
+소숫점 4자리까지만 반올림하여 표시해 보자.
+
+
+# 풀이
+
+round(17/3, 4) >>> 5.6667
+
+round 함수 사용
+
+
+# Q9. 다음과 같이 실행할 때 입력값을 모두 더하여 출력하는 스크립트(C:\doit\myargv.py)를 작성해 보자.
+
+C:\> cd doit
+C:\doit> python myargv.py 1 2 3 4 5 6 7 8 9 10
+55
+
+# 풀이
+
+myargv.py
+import sys
+
+numbers = sys.argv[1:] # 파일 이름을 제외한 명령 행의 모든 입력
+
+result = 0
+for number in numbers:
+    result += int(number)
+print(result)
+
+# Q10. os 모듈을 사용하여 다음과 같이 동작하도록 코드를 작성해 보자.
+1. C:\doit 디렉터리로 이동한다.
+2. dir 명령을 실행하고 그 결과를 변수에 담는다.
+3. dir 명령의 결과를 출력한다.
+
+# 풀이
+
+import os
+os.chdir("c:/doit") # 디렉터리 이동
+
+result = os.popen("dir") # popen으로 dir 명령어 수행
+
+print(result.read()) # 출력
+...
+abc.txt
+bidusource.html
+...
+
+# Q11. glob 모듈을 사용하여 C:\doit 디렉터리의 파일 중 확장자가 .py인 파일만 출력하는 프로그램을 작성해 보자.
+
+#풀이
+
+import glob
+glob.glob("c:/doit/*.py")
+>>> ['c:/doit/doit01.py', 'c:/doit/test.py'] # glob 모듈 사용
+
+# Q12. time 모듈을 사용하여 현재 날짜와 시간을 다음과 같은 형식으로 출력해 보자.
+
+2018/04/03 17:20:32
+
+# 풀이
+
+import time
+time.strftime("%Y/%m/%d %H:%M:%S")   # %Y:년, %m:월, %d:일, %H:시, %M:분, %S:초 >>> '2018/04/05 10:56:27' # strftime 모듈 사용
+
+# Q13. random 모듈을 사용하여 로또 번호(1~45 사이의 숫자 6개)를 생성해 보자(단 중복된 숫자가 있으면 안 됨).
+
+# 풀이
+
+import random
+
+result = []
+while len(result) < 6:
+    num = random.randint(1, 45)   # 1부터 45까지의 난수 생성
+    if num not in result:
+        result.append(num)
+
+print(result) # 출력
+
+# random 모듈 사용
