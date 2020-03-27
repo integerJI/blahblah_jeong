@@ -1,0 +1,11 @@
+블랙리스트 테이블에 인설트를 할때
+
+유저테이블은 동시에 업데이트를 해주면 된다.
+
+INSERT INTO USER_BAN_TABLE ( NUM, USER_ID, BAN_TITLE, MASTER_ID, USER_STATUS ) VALUES ( 1, 'user_1', '넌 밴이야', 'admin', 'Y' ); 
+
+와 동시에 유저에테이블의 회원상태를 업데이트
+
+두개의 mapper과 서비스, api를 만들어주고
+
+controller에서 호출할때 두개의 서비스를 호출하면 된다.
