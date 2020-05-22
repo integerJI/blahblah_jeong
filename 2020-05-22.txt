@@ -1,0 +1,90 @@
+## 점프 투 파이썬 - 강력한 정규 표현식의 세계로
+
+출처 : https://wikidocs.net/4308
+
+# 그루핑
+
+# ( )
+그룹을 만들어 주는 메타 문자이다.
+
+ex)
+p = re.compile('(ABC)+')
+m = p.search('ABCABCABC OK?')
+print(m) >>> <re.Match object; span=(0, 9), match='ABCABCABC'>
+print(m.group()) >>> ABCABCABC
+
+ex) 이름 + " " + 전화번호 형태의 문자를 찾는 정규식에서 이름만 뽑아내기
+p = re.compile(r"\w+\s+\d+[-]\d+[-]\d+")
+m = p.search("park 010-1234-1234")
+
+p = re.compile(r"(\w+)\s+\d+[-]\d+[-]\d+")
+m = p.search("park 010-1234-1234")
+print(m.group(1)) >>> park
+
+이름에 해당하는 \w+ 부분을 그룹 (\w+)으로 만들면 match 객체의 group(인덱스) 메서드를 사용하여 그루핑된 부분의 문자열만 뽑아낼 수 있다. 
+
+#group 메서드의 인덱스
+group(인덱스)	설명
+group(0)		매치된 전체 문자열
+group(1)		첫 번째 그룹에 해당되는 문자열
+group(2)		두 번째 그룹에 해당되는 문자열
+group(n)		n 번째 그룹에 해당되는 문자열
+
+ex) 전화번호만 뽑기
+p = re.compile(r"(\w+)\s+(\d+[-]\d+[-]\d+)")
+m = p.search("park 010-1234-1234")
+print(m.group(2)) >>> 010-1234-1234
+
+ex) 전화번호 중 국번만 뽑기
+p = re.compile(r"(\w+)\s+((\d+)[-]\d+[-]\d+)")
+m = p.search("park 010-1234-1234")
+print(m.group(3)) >>> 010
+
+#그루핑된 문자열 재참조(Backreferences)하기
+ex)
+p = re.compile(r'(\b\w+)\s+\1')
+p.search('Paris in the the spring').group() >>> 'the the'
+
+(\b\w+)\s+\1은 (그룹) + " " + 그룹과 동일한 단어와 매치됨을 의미
+이 코드의 경우 2개의 동일한 단어를 연속적으로 사용해야만 매치
+
+재참조 메타 문자인 \1을 사용하면 정규식의 그룹 중 첫 번째 그룹을 가리킨다.
+( 두 번째 그룹을 참조하려면 \2 )
+
+#그루핑된 문자열에 이름 붙이기
+
+ex) 이름과 전화번호를 추출하는 정규식
+(?P<name>\w+)\s+((\d+)[-]\d+[-]\d+)
+
+(\w+) --> (?P<name>\w+)
+
+(\w+)라는 그룹에 name이라는 이름을 붙인 것
+(?...) 표현식은 정규 표현식의 확장 구문
+
+확장 구문을 사용하면 가독성이 상당히 떨어지긴 하지만 반면에 강력함을 갖게 된다고 한다.
+
+그룹에 이름을 지어 주기
+
+(?P<그룹명>...)
+
+ex)
+p = re.compile(r"(?P<name>\w+)\s+((\d+)[-]\d+[-]\d+)")
+m = p.search("park 010-1234-1234")
+print(m.group("name")) >>> park
+
+p = re.compile(r'(?P<word>\b\w+)\s+(?P=word)')
+p.search('Paris in the the spring').group() >>> 'the the'
+
+재참조도 가능
+
+재참조할 때에는 (?P=그룹이름)이라는 확장 구문을 사용해야 한다.
+
+
+
+
+
+
+
+
+
+
