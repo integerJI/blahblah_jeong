@@ -1,0 +1,125 @@
+# -*- coding: utf-8 -*-
+# UTF-8 encoding when using korean
+# Python 회원가입 유효성 검사 
+import re
+
+p = re.compile('^[a-z0-9]') # ID 체크
+q = re.compile('^[A-Za-z0-9!@#$]') # PW 체크
+
+qq = re.compile('^[!@#$]') # PW 특수문자 포함 여부 확인
+qqq = re.compile('^[0-9]') # PW 숫자 포함 여부 확인
+qqqq = re.compile('^[A-Za-z]') # PW 문자 포함 여부 확인
+
+uid = input().strip()
+pw1 = input().strip()
+pw2 = input().strip()
+
+check = 0 # PW1 체크
+check2 = 0 # PW2 체크
+
+Fcheck = 0 # 최종 체크
+
+# ID 길이 체크
+if 3 > len(uid) :
+  Fcheck = 0
+elif 20 < len(uid) :
+  Fcheck = 0
+else :
+  for uidCheck in uid :
+    if (p.match(uidCheck) != None) == False :
+      Fcheck = 0
+      break
+    else :
+      continue
+      Fcheck += 1
+
+# PW1, PW2 문자 포함 여부 체크
+for pw1Check in pw1 :
+  if (qq.match(pw1Check) != None) == False :
+    continue
+  else :
+    check += 1
+    break
+
+for pw2Check in pw2 :
+  if (qq.match(pw2Check) != None) == False :
+    continue
+  else :
+    check2 += 1
+    break
+
+for pw1Check in pw1 :
+  if (qqq.match(pw1Check) != None) == False :
+    continue
+  else :
+    check += 1
+    break
+ 
+for pw2Check in pw2 :
+  if (qqq.match(pw2Check) != None) == False :
+    continue
+  else :
+    check2 += 1
+    break
+
+for pw1Check in pw1 :
+  if (qqqq.match(pw1Check) != None) == False :
+    continue
+  else :
+    check += 1
+    break 
+
+for pw2Check in pw2 :
+  if (qqqq.match(pw2Check) != None) == False :
+    continue
+  else :
+    check2 += 1
+    break
+
+# PW1 문자 포함 여부 확인
+if check == 3 :
+  if  8 > len(pw1) :
+    Fcheck = 0
+  elif 20 < len(pw1) :
+    Fcheck = 0
+  else :
+    for pw1Check2 in pw1 :
+      if (q.match(pw1Check2) != None) == False :
+        Fcheck = 0
+        break
+      else :
+        continue
+        Fcheck += 1
+else :
+  Fcheck = 0
+
+# PW2 문자 포함 여부 확인
+if check2 == 3 :
+  if 8 > len(pw2) :
+    Fcheck = 0
+  elif 20 < len(pw2) :
+    Fcheck = 0
+  else :
+    for pw2Check2 in pw2 :
+      if (q.match(pw2Check2) != None) == False :
+        Fcheck = 0
+        break
+      else :
+        continue
+        Fcheck +=1
+else :
+  Fcheck = 0
+ 
+# PW1, PW2 동일 여부 체크
+if pw1 == pw2 :
+  Fcheck += 1
+else :
+  Fcheck = 0
+ 
+# 최종 체크
+if Fcheck == 4 :
+  print('pass')
+else :
+  print('fail')
+
+ 
